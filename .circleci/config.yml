@@ -40,8 +40,12 @@ jobs:
       - run:
           name: Publish package
           command: |
+            git config --global user.email "${GIT_EMAIL}"
+            git config --global user.name "Alex Hayton"
             yarn version --patch
             yarn publish
+            git branch --set-upstream-to master
+            git push
 
 workflows:
   version: 2
