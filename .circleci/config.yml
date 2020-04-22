@@ -42,10 +42,8 @@ jobs:
           command: |
             git config --global user.email "${GIT_EMAIL}"
             git config --global user.name "Alex Hayton"
-            yarn version --patch
-            yarn publish
             git branch --set-upstream-to master
-            git push
+            npx release-it
 
 workflows:
   version: 2
