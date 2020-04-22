@@ -1,23 +1,9 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "umd",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "experimentalDecorators": true,
-      "outDir": "./dist",
-      "declaration": true,
-      "lib": [
-        "dom",
-        "es5",
-        "es2015",
-        "es2015.promise"
-      ]
-    },
-    "compileOnSave": true,
-    "include": [
-      "./index.ts",
-      "./lib/**/*.ts"
-    ]
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   }
-  
+}

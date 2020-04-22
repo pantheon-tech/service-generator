@@ -1,2 +1,5 @@
 node_modules
 coverage
+generators/app/index.js
+generators/app/templates/src/index.js
+generators/app/templates/test/index.spec.js

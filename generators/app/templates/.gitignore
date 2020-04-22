@@ -75,5 +75,10 @@ typings/
 # Test and coverage results
 test_results
 
+# Microbundle
+.rts2_cache_*
+
+src/**/*.js
+
 # Compiled JavaScript files
 dist

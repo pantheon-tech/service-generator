@@ -27,7 +27,6 @@ yo npm-typescript-starter
 
 MIT © [Umut Özel](umutozel.com)
 
-
 [npm-image]: https://badge.fury.io/js/generator-npm-typescript-starter.svg
 [npm-url]: https://npmjs.org/package/generator-npm-typescript-starter
 [travis-image]: https://travis-ci.org/umutozel/generator-npm-typescript-starter.svg?branch=master

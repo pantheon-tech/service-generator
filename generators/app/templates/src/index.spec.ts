@@ -1,13 +1,11 @@
-import 'mocha';
-import { assert, expect } from 'chai';
-import { test } from '../lib/index';
+import { test } from './';
 
 describe('index', function () {
     describe('test', function () {
         it('should return 42', function () {
             const result = test();
 
-            expect(result).to.equal(42);
+            expect(result).toEqual(42);
         });
     });
 });

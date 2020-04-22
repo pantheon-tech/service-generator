@@ -1,9 +1,9 @@
 {
   "generator-node": {
     "promptValues": {
-      "authorName": "Umut Özel",
-      "authorEmail": "umutozel@gmail.com",
-      "authorUrl": "umutozel.com"
+      "authorName": "Alex Hayton",
+      "authorEmail": "alex.hayton@gmail.com",
+      "authorUrl": "hayton.dev"
     }
   }
 }

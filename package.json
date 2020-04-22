@@ -1,12 +1,11 @@
 {
-  "name": "generator-npm-typescript-starter",
+  "name": "generator-typescript-library-starter",
   "version": "1.0.0",
-  "description": "Generate node library boilerplate with TypeScript support.",
-  "homepage": "https://github.com/umutozel/generator-npm-typescript-starter",
+  "description": "Generate node library boilerplate with TypeScript support",
+  "homepage": "https://github.com/alexhayton/generator-typescript-library-starter",
   "author": {
-    "name": "Umut Özel",
-    "email": "umutozel@gmail.com",
-    "url": "https://github.com/umutozel"
+    "name": "Alex Hayton",
+    "url": "https://github.com/alexhayton"
   },
   "files": [
     "generators"
@@ -21,41 +20,62 @@
     "generate",
     "yeoman-generator"
   ],
-  "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
-    "coveralls": "^3.0.0",
-    "nsp": "^2.8.0",
-    "eslint": "^4.19.1",
-    "prettier": "^1.11.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^6.1.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-config-xo": "^0.20.1",
-    "jest": "^22.0.6"
-  },
-  "engines": {
-    "npm": ">= 8.0.0"
-  },
-  "dependencies": {
-    "chalk": "^2.1.0",
-    "fullname": "^3.3.0",
-    "git-user-name": "^2.0.0",
-    "yeoman-generator": "^2.0.1",
-    "yosay": "^2.0.1"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "scripts": {
-    "prepublishOnly": "nsp check",
-    "pretest": "eslint .",
+    "build": "tsc",
+    "pretest": "npm run build",
     "precommit": "lint-staged",
+    "prepublish": "npm run build",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "test": "jest --coverage"
   },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/yeoman-assert": "^3.1.1",
+    "@types/yeoman-generator": "^3.1.4",
+    "@types/yeoman-test": "^2.0.3",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-formatter-pretty": "^3.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-unicorn": "^18.0.1",
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "lint-staged": "^10.1.6",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^2.4.1"
+  },
+  "engines": {
+    "npm": ">= 12.0.0"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "fullname": "^4.0.1",
+    "generator-license": "^5.4.0",
+    "git-user-email": "^0.2.2",
+    "git-user-name": "^2.0.0",
+    "yeoman-generator": "^4.8.2",
+    "yosay": "^2.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "generators/app/templates"
+    ],
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    }
+  },
   "lint-staged": {
-    "*.js": [
+    "*.ts": [
       "eslint --fix",
       "git add"
     ],
@@ -64,28 +84,6 @@
       "git add"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
-    "env": {
-      "jest": true,
-      "node": true
-    },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "printWidth": 90
-        }
-      ]
-    },
-    "plugins": [
-      "prettier"
-    ]
-  },
-  "repository": "umutozel/generator-npm-typescript-starter",
+  "repository": "alexhayton/generator-typescript-library-starter",
   "license": "MIT"
 }

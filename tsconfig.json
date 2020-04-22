@@ -1,0 +1,17 @@
+{
+  "exclude": [
+    "node_modules",
+    "generators/app/templates",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "generators/**/*",
+  ],
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
