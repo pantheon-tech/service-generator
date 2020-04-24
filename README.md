@@ -1,4 +1,4 @@
-# generator-typescript-library-starter [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-typescript-library-starter [![NPM version][npm-image]][npm-url] [![Build Status][circleci-image]][circleci-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Generate node and browser library boilerplate with TypeScript support.
 
 ## Installation
@@ -19,9 +19,7 @@ yarn create yo typescript-library-starter
 
 [npm-image]: https://badge.fury.io/js/generator-typescript-library-starter.svg
 [npm-url]: https://npmjs.org/package/generator-typescript-library-starter
-[travis-image]: https://travis-ci.org/alexhayton/generator-typescript-library-starter.svg?branch=master
-[travis-url]: https://travis-ci.org/alexhayton/generator-typescript-library-starter
+[circleci-image]: https://circleci.com/gh/alexhayton/generator-typescript-library-starter.svg?style=svg
+[circleci-url]: https://circleci.com/gh/alexhayton/generator-typescript-library-starter
 [daviddm-image]: https://david-dm.org/alexhayton/generator-typescript-library-starter.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/alexhayton/generator-typescript-library-starter
-[coveralls-image]: https://coveralls.io/repos/alexhayton/generator-typescript-library-starter/badge.svg
-[coveralls-url]: https://coveralls.io/r/alexhayton/generator-typescript-library-starter
