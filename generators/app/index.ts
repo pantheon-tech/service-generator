@@ -103,6 +103,11 @@ export default class TypescriptGenerator extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath(".eslintignore"),
+      this.destinationPath(".eslintignore")
+    );
+
+    this.fs.copy(
       this.templatePath(".gitignore"),
       this.destinationPath(".gitignore")
     );

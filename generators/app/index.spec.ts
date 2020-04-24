@@ -26,6 +26,7 @@ describe('generator-typescript-library-starter:app', () => {
       'index.ts',
       'tsconfig.json',
       '.eslintrc.js',
+      '.eslintignore',
       'src/index.ts',
       'src/index.spec.ts',
     ]);
