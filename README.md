@@ -1,4 +1,7 @@
-# generator-typescript-library-starter [![NPM version][npm-image]][npm-url] [![Build Status][circleci-image]][circleci-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-typescript-library-starter 
+[![NPM version][npm-image]][npm-url]
+[![CircleCI](https://circleci.com/gh/alexhayton/generator-typescript-library-starter.svg?style=shield)](https://circleci.com/gh/alexhayton/generator-typescript-library-starter)
+[![Dependency Status][daviddm-image]][daviddm-url]
 > Generate node and browser library boilerplate with TypeScript support.
 
 ## Installation
