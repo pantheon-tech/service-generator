@@ -1,3 +1,3 @@
-export function test() {
-    return 42;
+export function hello(): number {
+  return 42;
 }

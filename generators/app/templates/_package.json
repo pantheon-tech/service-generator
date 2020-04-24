@@ -30,9 +30,8 @@
   "scripts": {
     "build": "microbundle -o dist/ --sourcemap false --compress false",
     "dev": "microbundle watch -o dist/ --sourcemap false --compress false",
-    "test": "jest --coverage --config=jest.config.js",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls"
+    "test": "jest --coverage",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "repository": {
     "type": "git",
@@ -40,6 +39,16 @@
   },
   "keywords": [
   ],
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "generators/app/templates"
+    ],
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    }
+  },
   "author": "<%= username %>",
   "license": "<%= license %>",
   "bugs": {

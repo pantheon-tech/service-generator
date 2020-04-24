@@ -1,9 +1,9 @@
-import { test } from './';
+import { hello } from '.';
 
-describe('index', function () {
-    describe('test', function () {
-        it('should return 42', function () {
-            const result = test();
+describe('index', () => {
+    describe('test', () => {
+        it('should return 42', () => {
+            const result = hello();
 
             expect(result).toEqual(42);
         });
