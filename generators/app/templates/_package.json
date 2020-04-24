@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "<%= description %>",
   "main": "dist/<%= appname %>.js",
-  "umd:main": "dist/<%= appname %>.js",
+  "umd:main": "dist/<%= appname %>.umd.js",
   "module": "dist/<%= appname %>.mjs",
   "files": [
     "dist",
