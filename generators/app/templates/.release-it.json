@@ -1,7 +1,4 @@
 {
-  "github": {
-    "release": true
-  },
   "git": {
     "commitMessage": "[ci skip] release v${version}",
     "requireCleanWorkingDir": false

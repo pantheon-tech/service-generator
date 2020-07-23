@@ -1,42 +1,79 @@
 /* eslint-disable jest/expect-expect */
-import path from 'path';
-import assert from 'yeoman-assert';
-import helpers from 'yeoman-test';
+import path from "path";
+import assert from "yeoman-assert";
+import helpers from "yeoman-test";
 
-const name = 'test-project';
-const email = 'alex@test.com';
-const description = 'description of test project';
-const username = 'alanturing';
-const fullname = 'Alan Turing';
-const license = 'MIT';
+const name = "test-project";
+const email = "alex@test.com";
+const description = "description of test project";
+const username = "alanturing";
+const fullname = "Alan Turing";
+const license = "MIT";
 
-describe('generator-typescript-library-starter:app', () => {
-  beforeAll(() => {
-    return helpers
-      .run(path.join(__dirname, '../app'))
-      .withPrompts({ name, description, username, email, fullname, license });
+describe("generator-typescript-library-starter:app", () => {
+  describe("Without release helpers", () => {
+    beforeAll(() => {
+      return helpers
+        .run(path.join(__dirname, "../app"))
+        .withPrompts({ name, description, username, email, fullname, license });
+    });
+
+    it("creates files but not circleci ones", () => {
+      assert.file([
+        "LICENSE",
+        "package.json",
+        "README.md",
+        ".gitignore",
+        "index.ts",
+        "tsconfig.json",
+        ".eslintrc.js",
+        ".eslintignore",
+        "src/index.ts",
+        "src/index.spec.ts",
+      ]);
+    });
+
+    it("replaces prompt values", () => {
+      assert.fileContent("LICENSE", fullname);
+      assert.fileContent("LICENSE", new Date().getFullYear().toString());
+      assert.fileContent("package.json", username);
+      assert.fileContent("package.json", description);
+      assert.fileContent("README.md", name);
+    });
   });
 
-  it('creates files', () => {
-    assert.file([
-      'LICENSE',
-      'package.json',
-      'README.md',
-      '.gitignore',
-      'index.ts',
-      'tsconfig.json',
-      '.eslintrc.js',
-      '.eslintignore',
-      'src/index.ts',
-      'src/index.spec.ts',
-    ]);
-  });
+  describe("with release helpers", () => {
+    beforeAll(() => {
+      return helpers
+        .run(path.join(__dirname, "../app"))
+        .withPrompts({ name, description, username, email, fullname, license, releaseit: true });
+    });
 
-  it('replaces prompt values', () => {
-    assert.fileContent('LICENSE', fullname);
-    assert.fileContent('LICENSE', new Date().getFullYear().toString());
-    assert.fileContent('package.json', username);
-    assert.fileContent('package.json', description);
-    assert.fileContent('README.md', name);
+    it("creates files but not circleci ones", () => {
+      assert.file([
+        "LICENSE",
+        "package.json",
+        "README.md",
+        ".gitignore",
+        "index.ts",
+        "tsconfig.json",
+        ".eslintrc.js",
+        ".eslintignore",
+        "src/index.ts",
+        "src/index.spec.ts",
+        ".circleci/config.yml",
+        ".release-it.json",
+      ]);
+    });
+
+    it("replaces prompt values", () => {
+      assert.fileContent("LICENSE", fullname);
+      assert.fileContent("LICENSE", new Date().getFullYear().toString());
+      assert.fileContent("package.json", username);
+      assert.fileContent("package.json", description);
+      assert.fileContent("README.md", name);
+      assert.fileContent(".circleci/config.yml", username);
+      assert.fileContent(".circleci/config.yml", email);
+    });
   });
 });

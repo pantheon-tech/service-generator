@@ -9,10 +9,12 @@ const email = require("git-user-email")();
 /* eslint-enable @typescript-eslint/no-var-requires */
 
 interface Answers {
-  name?: string,
-  description?: string,
-  username?: string,
-  license?: string,
+  name?: string;
+  description?: string;
+  username?: string;
+  license?: string;
+  email?: string;
+  releaseit?: boolean;
 }
 
 export default class TypescriptGenerator extends Generator {
@@ -50,6 +52,11 @@ export default class TypescriptGenerator extends Generator {
         message: "Your full name",
         default: fullname,
       },
+      {
+        type: "confirm",
+        name: "releaseit",
+        message: "Would you like to include package release scripts via CircleCI?",
+      }
     ]);
 
     this.answers = answers;
@@ -111,6 +118,27 @@ export default class TypescriptGenerator extends Generator {
       this.templatePath(".gitignore"),
       this.destinationPath(".gitignore")
     );
+
+    if (this.answers.releaseit) {
+      this.fs.copyTpl(
+        this.templatePath(".circleci/_config.yml"),
+        this.destinationPath(".circleci/config.yml"),
+        {
+          username: this.answers.username,
+          email: this.answers.email,
+        }
+      );
+
+      this.fs.copy(
+        this.templatePath(".release-it.json"),
+        this.destinationPath(".release-it.json")
+      );
+
+      console.log("CircleCI Notes...");
+      console.log("Please make sure to set an NPM_TOKEN environment variable and provide a user checkout key to enable version bumps committed to the repo");
+      console.log("See Also https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow#create-a-new-authentication-token");
+      console.log("See Also https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories");
+    }
   }
 
   installing(): void {

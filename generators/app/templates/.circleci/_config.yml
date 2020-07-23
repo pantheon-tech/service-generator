@@ -9,7 +9,7 @@ defaults: &defaults
     - image: circleci/node:12
 
 jobs:
-  test:
+  install:
     <<: *defaults
     steps:
       - checkout
@@ -17,9 +17,6 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn --frozen-lockfile
-      - run:
-          name: Run tests
-          command: yarn test
       - save_cache:
           paths:
             - node_modules
@@ -27,6 +24,27 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths: .
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Run tests
+          command: yarn test
+
+
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Run lint
+          command: yarn lint
 
   deploy:
     <<: *defaults
@@ -41,8 +59,8 @@ jobs:
           command: |
             mkdir ~/.ssh/
             echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            git config --global user.email "${GIT_EMAIL}"
-            git config --global user.name "${GIT_USERNAME}"
+            git config --global user.email "<%= email %>"
+            git config --global user.name "<%= username %>"
             git branch --set-upstream-to master
             npx release-it
 
@@ -50,9 +68,16 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - test
+      - install
+      - test:
+          requires:
+            - install
+      - lint:
+          requires:
+            - install
       - deploy:
           requires:
+            - lint
             - test
           filters:
             branches:
