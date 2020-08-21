@@ -70,6 +70,9 @@
       "node_modules",
       "generators/app/templates"
     ],
+    "collectCoverageFrom": [
+      "generators/app/*.js"
+    ],
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     }

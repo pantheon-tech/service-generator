@@ -10,6 +10,19 @@ const username = "alanturing";
 const fullname = "Alan Turing";
 const license = "MIT";
 
+const baseFiles = [
+  "LICENSE",
+  "package.json",
+  "README.md",
+  ".gitignore",
+  "index.ts",
+  "tsconfig.json",
+  ".eslintrc.js",
+  ".eslintignore",
+  "src/index.ts",
+  "src/index.spec.ts",
+];
+
 describe("generator-typescript-library-starter:app", () => {
   describe("Without release helpers", () => {
     beforeAll(() => {
@@ -19,18 +32,7 @@ describe("generator-typescript-library-starter:app", () => {
     });
 
     it("creates files but not circleci ones", () => {
-      assert.file([
-        "LICENSE",
-        "package.json",
-        "README.md",
-        ".gitignore",
-        "index.ts",
-        "tsconfig.json",
-        ".eslintrc.js",
-        ".eslintignore",
-        "src/index.ts",
-        "src/index.spec.ts",
-      ]);
+      assert.file(baseFiles);
     });
 
     it("replaces prompt values", () => {
@@ -49,18 +51,9 @@ describe("generator-typescript-library-starter:app", () => {
         .withPrompts({ name, description, username, email, fullname, license, releaseit: true });
     });
 
-    it("creates files but not circleci ones", () => {
+    it("creates files and include circleci ones", () => {
       assert.file([
-        "LICENSE",
-        "package.json",
-        "README.md",
-        ".gitignore",
-        "index.ts",
-        "tsconfig.json",
-        ".eslintrc.js",
-        ".eslintignore",
-        "src/index.ts",
-        "src/index.spec.ts",
+        ...baseFiles,
         ".circleci/config.yml",
         ".release-it.json",
       ]);
