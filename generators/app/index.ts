@@ -115,7 +115,7 @@ export default class TypescriptGenerator extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath(".gitignore"),
+      this.templatePath("_gitignore"),
       this.destinationPath(".gitignore")
     );
 

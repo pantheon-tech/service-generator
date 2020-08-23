@@ -19,7 +19,7 @@ yarn create yo typescript-library-starter
 - [X] Linting with Prettier + Airbnb + Unicorn already set up
 - [X] Test coverage with jest
 - [X] Build + Minify for both browsers and nodejs with `microbundle`
-- [X] (Optional) Ready-made release pipeline with CircleCI
+- [X] *Optional* Ready-made release pipeline with CircleCI
 
 [npm-image]: 
 [npm-url]: 
