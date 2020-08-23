@@ -1,6 +1,6 @@
 {
   "name": "generator-typescript-library-starter",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Generate node library boilerplate with TypeScript support",
   "homepage": "https://github.com/alexhayton/generator-typescript-library-starter",
   "author": {
