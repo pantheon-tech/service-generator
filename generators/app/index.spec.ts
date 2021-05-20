@@ -1,4 +1,5 @@
 /* eslint-disable jest/expect-expect */
+/* eslint-disable unicorn/prefer-module */
 import path from "path";
 import assert from "yeoman-assert";
 import helpers from "yeoman-test";
@@ -17,6 +18,7 @@ const baseFiles = [
   ".gitignore",
   "index.ts",
   "tsconfig.json",
+  "tsconfig.eslint.json",
   ".eslintrc.js",
   ".eslintignore",
   "src/index.ts",
@@ -25,11 +27,11 @@ const baseFiles = [
 
 describe("generator-typescript-library-starter:app", () => {
   describe("Without release helpers", () => {
-    beforeAll(() => {
-      return helpers
+    beforeAll(() =>
+      helpers
         .run(path.join(__dirname, "../app"))
-        .withPrompts({ name, description, username, email, fullname, license });
-    });
+        .withPrompts({ name, description, username, email, fullname, license })
+    );
 
     it("creates files but not circleci ones", () => {
       assert.file(baseFiles);
@@ -45,18 +47,20 @@ describe("generator-typescript-library-starter:app", () => {
   });
 
   describe("with release helpers", () => {
-    beforeAll(() => {
-      return helpers
-        .run(path.join(__dirname, "../app"))
-        .withPrompts({ name, description, username, email, fullname, license, releaseit: true });
-    });
+    beforeAll(() =>
+      helpers.run(path.join(__dirname, "../app")).withPrompts({
+        name,
+        description,
+        username,
+        email,
+        fullname,
+        license,
+        releaseit: true,
+      })
+    );
 
     it("creates files and include circleci ones", () => {
-      assert.file([
-        ...baseFiles,
-        ".circleci/config.yml",
-        ".release-it.json",
-      ]);
+      assert.file([...baseFiles, ".circleci/config.yml", ".release-it.json"]);
     });
 
     it("replaces prompt values", () => {

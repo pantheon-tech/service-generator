@@ -1,3 +1,4 @@
+.eslintrc.js
 coverage
 generators/app/index.js
 **/templates
