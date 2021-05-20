@@ -46,6 +46,8 @@ module.exports = {
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
+    // Doesn't play nice with Typescript or Node 12
+    "unicorn/prefer-node-protocol": "off",
     "no-console": "off"
   },
 }

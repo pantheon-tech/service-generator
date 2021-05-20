@@ -1,11 +1,8 @@
 /* eslint-disable jest/expect-expect */
-import path from "node:path";
+/* eslint-disable unicorn/prefer-module */
+import path from "path";
 import assert from "yeoman-assert";
 import helpers from "yeoman-test";
-import { fileURLToPath } from "node:url";
-
-/* eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention */
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const name = "test-project";
 const email = "alex@test.com";

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable unicorn/prefer-module */
-import path from "node:path";
+import path from "path";
 import Generator from "yeoman-generator";
 
 /* eslint-disable @typescript-eslint/no-var-requires  */
@@ -145,9 +145,5 @@ export default class TypescriptGenerator extends Generator {
       console.log("See Also https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow#create-a-new-authentication-token");
       console.log("See Also https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories");
     }
-  }
-
-  installing(): void {
-    this.yarnInstall();
   }
 };
