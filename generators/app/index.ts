@@ -1,8 +1,9 @@
 /* eslint-disable import/no-default-export */
-import path from "path";
+/* eslint-disable unicorn/prefer-module */
+import path from "node:path";
 import Generator from "yeoman-generator";
 
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires  */
 const fullnamePromise = require("fullname")();
 const username = require("git-user-name")();
 const email = require("git-user-email")();
@@ -97,6 +98,11 @@ export default class TypescriptGenerator extends Generator {
     this.fs.copy(
       this.templatePath("tsconfig.json"),
       this.destinationPath("tsconfig.json")
+    );
+
+    this.fs.copy(
+      this.templatePath("tsconfig.eslint.json"),
+      this.destinationPath("tsconfig.eslint.json")
     );
 
     this.fs.copy(

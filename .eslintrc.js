@@ -12,11 +12,9 @@ module.exports = {
     "plugin:promise/recommended",
     "plugin:unicorn/recommended",
     "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint",
   ],
   parserOptions: {
-    project: "tsconfig.json"
+    project: "tsconfig.eslint.json"
   },
   env: {
     node: true,
@@ -48,5 +46,6 @@ module.exports = {
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
+    "no-console": "off"
   },
 }

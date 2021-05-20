@@ -1,7 +1,11 @@
 /* eslint-disable jest/expect-expect */
-import path from "path";
+import path from "node:path";
 import assert from "yeoman-assert";
 import helpers from "yeoman-test";
+import { fileURLToPath } from "node:url";
+
+/* eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention */
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const name = "test-project";
 const email = "alex@test.com";
@@ -17,6 +21,7 @@ const baseFiles = [
   ".gitignore",
   "index.ts",
   "tsconfig.json",
+  "tsconfig.eslint.json",
   ".eslintrc.js",
   ".eslintignore",
   "src/index.ts",
@@ -25,11 +30,11 @@ const baseFiles = [
 
 describe("generator-typescript-library-starter:app", () => {
   describe("Without release helpers", () => {
-    beforeAll(() => {
-      return helpers
+    beforeAll(() =>
+      helpers
         .run(path.join(__dirname, "../app"))
-        .withPrompts({ name, description, username, email, fullname, license });
-    });
+        .withPrompts({ name, description, username, email, fullname, license })
+    );
 
     it("creates files but not circleci ones", () => {
       assert.file(baseFiles);
@@ -45,18 +50,20 @@ describe("generator-typescript-library-starter:app", () => {
   });
 
   describe("with release helpers", () => {
-    beforeAll(() => {
-      return helpers
-        .run(path.join(__dirname, "../app"))
-        .withPrompts({ name, description, username, email, fullname, license, releaseit: true });
-    });
+    beforeAll(() =>
+      helpers.run(path.join(__dirname, "../app")).withPrompts({
+        name,
+        description,
+        username,
+        email,
+        fullname,
+        license,
+        releaseit: true,
+      })
+    );
 
     it("creates files and include circleci ones", () => {
-      assert.file([
-        ...baseFiles,
-        ".circleci/config.yml",
-        ".release-it.json",
-      ]);
+      assert.file([...baseFiles, ".circleci/config.yml", ".release-it.json"]);
     });
 
     it("replaces prompt values", () => {

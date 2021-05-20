@@ -18,6 +18,9 @@ jobs:
           - v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn --frozen-lockfile
       - run:
+          name: Run lint
+          command: yarn lint
+      - run:
           name: Run tests
           command: yarn test
       - save_cache:
