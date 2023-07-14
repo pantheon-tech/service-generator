@@ -1,0 +1,63 @@
+stages:
+  - stage: Build
+    displayName: Build and package (<%= appname %>)
+    env:
+      appName: <%= appname %>
+    jobs:
+      - job: Build
+        displayName: Build and package
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: NodeTool@0
+            displayName: Use Node version from package.json
+            inputs:
+              versionSource: "fromFile"
+          - script: |
+              sudo curl -sf https://gobinaries.com/tj/node-prune | sh | sudo bash -s -- -b /usr/local/bin
+            displayName: Install node-prune
+          - script: |
+              npm install
+            displayName: npm install
+          - script: |
+                  npm run test
+            displayName: Running tests
+            continueOnError: "true"
+          - task: PublishTestResults@2
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: 'junit.xml'
+              mergeTestResults: true
+              failTaskOnFailedTests: true
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+          - script: |
+              npm run build
+            displayName: npm run build
+          - script: |
+              npm prune --production
+            displayName: npm prune
+          - script: |
+              /usr/local/bin/node-prune
+            displayName: execute node-prune
+          - task: CopyFiles@2
+            displayName: Only publish files needed for runtime
+            inputs:
+              SourceFolder: "$(System.DefaultWorkingDirectory)"
+              Contents: |
+                dist/**
+                package.json
+                node_modules/**
+              TargetFolder: "$(Build.ArtifactStagingDirectory)"
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: "$(Build.ArtifactStagingDirectory)"
+              includeRootFolder: false
+              archiveFile: "$(Build.ArtifactStagingDirectory)/$(appName).zip"
+              archiveType: zip
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/$(appName).zip"

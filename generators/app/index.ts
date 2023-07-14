@@ -4,60 +4,49 @@ import path from "path";
 import Generator from "yeoman-generator";
 
 /* eslint-disable @typescript-eslint/no-var-requires  */
-const fullnamePromise = require("fullname")();
-const username = require("git-user-name")();
-const email = require("git-user-email")();
-/* eslint-enable @typescript-eslint/no-var-requires */
 
 interface Answers {
   description?: string;
+  version?: string;
   email?: string;
   fullname?: string;
   license?: string;
   name?: string;
-  releaseit?: boolean;
-  username?: string;
 }
 
 export default class TypescriptGenerator extends Generator {
   private answers: Answers = {};
 
   async prompting(): Promise<void> {
-    const fullname = await fullnamePromise;
     const answers = await this.prompt([
       {
         type: "input",
         name: "name",
-        message: "Your project name",
+        message: "Service name",
         default: this.appname,
       },
       {
         type: "input",
         name: "description",
-        message: "Your project description",
-      },
-      {
+        message: "Service description",
+      },  {
         type: "input",
-        name: "username",
-        message: "Your git user name",
-        default: username,
+        name: "version",
+        message: "Initial version",
+        default: "0.0.1"
       },
+
       {
         type: "input",
         name: "email",
         message: "Your email",
-        default: email,
+        default: 'daniel@pantheon.limited',
       },
       {
         type: "input",
         name: "fullname",
         message: "Your full name",
-        default: fullname,
-      },
-      {
-        type: "confirm",
-        name: "releaseit",
-        message: "Would you like to include package release scripts via CircleCI?",
+        default: 'Daniel Skipper',
       }
     ]);
 
@@ -85,8 +74,8 @@ export default class TypescriptGenerator extends Generator {
         appname: this.destinationPath().split(path.sep).pop(),
         description: this.answers.description,
         fullname: this.answers.fullname,
-        username: this.answers.username,
         license: this.answers.license,
+        version: this.answers.version,
       }
     );
 
@@ -95,6 +84,24 @@ export default class TypescriptGenerator extends Generator {
     this.fs.copy(
       this.templatePath("index.ts"),
       this.destinationPath("index.ts")
+    );
+
+    this.fs.copyTpl(
+      this.templatePath("azure-pipeline.aml"),
+      this.destinationPath("azure-pipeline.aml"),
+      {
+        appname: this.destinationPath().split(path.sep).pop(),
+        description: this.answers.description,
+      }
+    );
+
+    this.fs.copyTpl(
+      this.templatePath(".env"),
+      this.destinationPath("azure-pipeline.aml"),
+      {
+        appname: this.destinationPath().split(path.sep).pop(),
+        description: this.answers.description,
+      }
     );
 
     this.fs.copy(
@@ -126,26 +133,5 @@ export default class TypescriptGenerator extends Generator {
       this.templatePath("_gitignore"),
       this.destinationPath(".gitignore")
     );
-
-    if (this.answers.releaseit) {
-      this.fs.copyTpl(
-        this.templatePath(".circleci/_config.yml"),
-        this.destinationPath(".circleci/config.yml"),
-        {
-          fullname: this.answers.fullname,
-          email: this.answers.email,
-        }
-      );
-
-      this.fs.copy(
-        this.templatePath(".release-it.json"),
-        this.destinationPath(".release-it.json")
-      );
-
-      console.log("CircleCI Notes...");
-      console.log("Please make sure to set an NPM_TOKEN environment variable and provide a user checkout key to enable version bumps committed to the repo");
-      console.log("See Also https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow#create-a-new-authentication-token");
-      console.log("See Also https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories");
-    }
   }
 };

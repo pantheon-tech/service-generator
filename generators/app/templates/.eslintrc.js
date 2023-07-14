@@ -6,6 +6,7 @@ module.exports = {
     "unicorn",
   ],
   extends: [
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
@@ -13,6 +14,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "prettier",
   ],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "tsconfig.eslint.json"
   },
@@ -29,7 +31,7 @@ module.exports = {
     // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
     "react/destructuring-assignment": "off",
     // No jsx extension: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904
-    "react/jsx-filename-extension": "off",
+    "react/jsx-filename-extension": "on",
     // Use function hoisting to improve code readability
     "no-use-before-define": [
       "error",
@@ -48,5 +50,30 @@ module.exports = {
     "unicorn/prevent-abbreviations": "off",
     // Doesn't play nice with Typescript or Node 12
     "unicorn/prefer-node-protocol": "off",
+    // my stuff
+    "@typescript-eslint/no-unsafe-member-access": "warn",
+    "@typescript-eslint/no-unnecessary-type-constraint": "error",
+    "@typescript-eslint/no-unsafe-argument": "warn",
+    "@typescript-eslint/no-unsafe-call": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "@typescript-eslint/camelcase": "off",
+    "object-property-newline": [
+      "error",
+      {
+        "allowMultiplePropertiesPerLine": false,
+        "allowAllPropertiesOnSameLine": true
+      }
+    ],
+    "@typescript-eslint/no-redundant-type-constituents": "warn",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "{}": false
+        },
+        "extendDefaults": true
+      }
+    ]
   },
 }

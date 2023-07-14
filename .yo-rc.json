@@ -1,9 +1,9 @@
 {
   "generator-node": {
     "promptValues": {
-      "authorName": "Alex Hayton",
-      "authorEmail": "alex.hayton@gmail.com",
-      "authorUrl": "hayton.dev"
+      "authorName": "Daniel Skipper",
+      "authorEmail": "daniel@pantheon.limited",
+      "authorUrl": "pantheon.limited"
     }
   }
 }
